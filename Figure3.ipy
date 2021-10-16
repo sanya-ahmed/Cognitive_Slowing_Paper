@@ -7,7 +7,7 @@
 import nengo
 import nengo_spa as spa
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
+
 # with and without seed
 import numpy as np
 import random
