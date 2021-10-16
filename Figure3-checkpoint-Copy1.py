@@ -171,10 +171,10 @@ with spa.Network(seed = 1) as model:
 
   #Plot the outputs      
         plt.figure(figsize = [6, 3.5])
-        plt.plot(sim.trange(),sim.data[probe_Color][:,127])
-        plt.plot(sim.trange(),sim.data[probe_Color][:,0])
-        plt.plot(sim.trange(),sim.data[probe_Color][:,10])
-        plt.plot(sim.trange(),sim.data[probe_Color][:,20], 'b-', label = 'blue fb = 0.2')
+        plt.plot(sim.trange(),sim.data[probe_Color][:,127], color='black', linestyle='-.')
+        plt.plot(sim.trange(),sim.data[probe_Color][:,0], color='black', linestyle='solid')
+        plt.plot(sim.trange(),sim.data[probe_Color][:,10], color='black', linestyle='dashed')
+        plt.plot(sim.trange(),sim.data[probe_Color][:,20], color='black', linestyle='dotted')
         plt.title("Figure 3a -  4 out of 128 elements" )
         plt.xlabel('Time [s]')
         plt.ylabel("Value")
@@ -183,10 +183,9 @@ with spa.Network(seed = 1) as model:
         #Plot dot product
         
         plt.figure(figsize = [6,3.5])
-        plt.plot(sim.trange(), numbers[:,0], label = 'blue', color='black', linestyle='solid')
-        plt.plot(sim.trange(), numbers[:,1], label = 'red', color='black', linestyle='dashed')
-        plt.plot(sim.trange(), numbers[:,2], label = 'green', color='black', linestyle='dotted')
-        plt.legend(loc='right');
+        plt.plot(sim.trange(), numbers[:,0], label = 'blue', color='blue')
+        plt.plot(sim.trange(), numbers[:,1], label = 'red', color='red')
+        plt.plot(sim.trange(), numbers[:,2], label = 'green', color='green')
         plt.xlabel ("Time [s]")
         plt.ylabel("Dot Product")
         plt.title('Figure 3b - Dot Products ')
