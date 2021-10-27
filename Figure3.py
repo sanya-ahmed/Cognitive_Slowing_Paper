@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[63]:
+# In[65]:
 
 
 import nengo
@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 import matplotlib.transforms as tfrms
 import matplotlib.offsetbox
 from matplotlib.lines import Line2D
-
 # with and without seed
 import numpy as np
 import random
@@ -174,7 +173,7 @@ with spa.Network(seed = 1) as model:
 
         #Plot the outputs 
         
-        fig, axs = plt.subplots(2, sharex=True, figsize=(5,5))
+        fig, axs = plt.subplots(3, figsize=(7,11))
         fig.suptitle('Figure 3')
         axs[0].plot(figsize = [6, 3.5])
         axs[0].plot(sim.trange(),sim.data[probe_Color][:,127], color='black')
@@ -185,17 +184,17 @@ with spa.Network(seed = 1) as model:
         axs[0].set_xlabel('Time [s]')
         axs[0].set_ylabel("Value")
         ax = fig.gca()
-        axs[0].set_xticks([])    # disable tick
+        axs[0].set_xticks([])   # disable tick
         axs[0].set_yticks([])
-        axs[0].set_ylim([-0.5, 0.3])
+        axs[0].set_ylim([-0.5, 0.35])
         trans = tfrms.blended_transform_factory( ax.transData, ax.transAxes )
-        axs[0].errorbar( 2.5, -0.42, xerr=0.5, color='k', capsize=5 )
+        axs[0].errorbar( 2.5, -0.39, xerr=0.5, color='k', capsize=5 )
         axs[0].text( 2.5, -0.33, '1 sec', horizontalalignment='center', verticalalignment='top')
         #plt.savefig('Figure3a_S_JL29.png')
         
         #Plot dot product
         
-        axs[1].plot(figsize = [6,3.5])
+        axs[1].plot(figsize = [6, 3.5])
         axs[1].plot(sim.trange(), numbers[:,0], label = 'blue', color='blue')
         axs[1].plot(sim.trange(), numbers[:,1], label = 'red', color='red')
         axs[1].plot(sim.trange(), numbers[:,2], label = 'green', color='green')
@@ -204,16 +203,53 @@ with spa.Network(seed = 1) as model:
         axs[1].set_xticks([])    # disable tick
         axs[1].set_yticks([])
         axs[1].set_ylim([-0.5, 1])
-        axs[1].errorbar( 2.5, 0.08, xerr=0.5, color='k', capsize=5, transform=trans )
-        axs[1].text( 2.5, 0.2, '1 sec',  horizontalalignment='center', verticalalignment='top', transform=trans )
+        axs[1].errorbar( 2.5, -0.32, xerr=0.5, color='k', capsize=5)
+        axs[1].text( 2.55, -0.2, '1 sec',  horizontalalignment='center', verticalalignment='top')
         axs[1].set_title('B: Dot Products ')
-        fig.tight_layout()
-        #plt.savefig('Figure3b_S_JL29.png')
+
+        #Plot Part C
+        #Plot part C
+        #Generate Plots
+        numbers_array_0 = pickle.load(open("JULY21", "rb"))
+        x3_line = np.linspace(0, 3, 3000)
+        axs[2].plot(figsize = (6, 3.5))
+        xmin, xmax = 1, 1.4
+        ymin, ymax = -0.2, 1.2
+        plt.plot(x3_line, numbers_array_0[:,0], 'blue' )
+        plt.plot(x3_line, numbers_array_0[:,1], 'red')
+        plt.plot(x3_line, numbers_array_0[:,2], 'green' )
+
+        L_pt1 = [0,0.8]
+        R_pt1 = [10,0.8]
+        x1_line = L_pt1[0], R_pt1[0]
+        y1_line = L_pt1[1], R_pt1[1]
+        plt.plot(x1_line, y1_line, color = 'Black')
+
+        L_pt2 = [0,0.5]
+        R_pt2 = [10,0.5]
+        x2_line = L_pt2[0], R_pt2[0]
+        y2_line = L_pt2[1], R_pt2[1]
+        plt.plot(x2_line, y2_line, color = 'Black')
+
+        axs[2].set_xlabel ("Time [s]")
+        axs[2].set_ylabel("Dot Product")
+        plt.xlim(xmin, xmax)
+        axs[2].set_yticks([])
+        axs[2].set_xticks([])
+        bb=np.array([1])
+        axs[2].errorbar( 1.33, -0.17, xerr=0.05, color='k', capsize=5)
+        axs[2].text( 1.34, -0.07, '0.1 sec',  horizontalalignment='center', verticalalignment='top')
         
+        bb=np.array([1])
+        plt.plot(bb * 1.18,bb * 0.8,marker="H", fillstyle='none', markersize=15, linewidth=0, color='black')
+        plt.plot(bb * 1.035,bb * 0.80,marker="v", fillstyle='none', markersize=15, linewidth=0, color='black')
+        plt.plot(bb * 1.165,bb * 0.5,marker="v", fillstyle='none', markersize=15, linewidth=0, color='black')
+        plt.plot(bb * 1.045,bb * 0.5,marker="H", fillstyle='none', markersize=15, linewidth=0, color='black')
+         
+        plt.title('C: Effect of Threshold Level on RT')
         fig.savefig('Figure3.png')
         fig.savefig('Figure3.svg')
-        
-        
+         
         
 
 
